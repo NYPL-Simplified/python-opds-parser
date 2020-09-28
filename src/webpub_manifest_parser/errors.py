@@ -1,8 +1,8 @@
 class BaseError(Exception):
-    """Base class for all errors"""
+    """Base class for all errors."""
 
     def __init__(self, message=None, inner_exception=None):
-        """Initializes a new instance of BaseError class
+        """Initialize a new instance of BaseError class.
 
         :param message: String containing description of the error occurred
         :param inner_exception: (Optional) Inner exception
@@ -16,7 +16,7 @@ class BaseError(Exception):
 
     @property
     def inner_exception(self):
-        """Returns an inner exception
+        """Return the inner exception.
 
         :return: Inner exception
         :rtype: Exception
@@ -24,7 +24,7 @@ class BaseError(Exception):
         return self._inner_exception
 
     def __eq__(self, other):
-        """Compares two BaseError objects
+        """Compare two BaseError objects.
 
         :param other: BaseError object
         :type other: BaseError
@@ -35,10 +35,14 @@ class BaseError(Exception):
         if not isinstance(other, BaseError):
             return False
 
-        return self.message == other.message
+        return str(self) == str(other)
 
     def __repr__(self):
-        return '<BaseError(message={0}, inner_exception={1})>'.format(
-            self.message,
-            self.inner_exception
+        """Return error's string representation.
+
+        :return: Error's string representation
+        :rtype: basestring
+        """
+        return "<BaseError(message={0}, inner_exception={1})>".format(
+            str(self), self.inner_exception
         )

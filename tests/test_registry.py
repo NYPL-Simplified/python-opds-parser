@@ -2,13 +2,15 @@ from unittest import TestCase
 
 from nose.tools import assert_raises, eq_
 
-from python_rwpm_parser.registry import Registry, RegistryItem
+from webpub_manifest_parser.registry import Registry, RegistryItem
 
 
 class RegistryTest(TestCase):
-    def test_registry_does_not_allow_to_pass_non_registry_item_objects_to_constructor(self):
+    def test_registry_does_not_allow_to_pass_non_registry_item_objects_to_constructor(
+        self,
+    ):
         # Arrange
-        new_registry_item = 'dummy'
+        new_registry_item = "dummy"
 
         # Act, assert
         with assert_raises(ValueError):
@@ -16,7 +18,7 @@ class RegistryTest(TestCase):
 
     def test_registry_allows_to_add_registry_items_through_constructor(self):
         # Arrange
-        registry_item_key = 'NEW_REGISTRY_ITEM_KEY'
+        registry_item_key = "NEW_REGISTRY_ITEM_KEY"
         registry_item = RegistryItem(registry_item_key)
 
         # Act
@@ -31,11 +33,11 @@ class RegistryTest(TestCase):
 
         # Act, assert
         with assert_raises(ValueError):
-            registry['NEW_REGISTRY_ITEM_KEY'] = 'dummy'
+            registry["NEW_REGISTRY_ITEM_KEY"] = "dummy"
 
     def test_registry_allows_to_add_registry_item_objects(self):
         # Arrange
-        registry_item_key = 'NEW_REGISTRY_ITEM_KEY'
+        registry_item_key = "NEW_REGISTRY_ITEM_KEY"
         registry_item = RegistryItem(registry_item_key)
         registry = Registry()
 
@@ -47,7 +49,7 @@ class RegistryTest(TestCase):
 
     def test_registry_allows_to_delete_item(self):
         # Arrange
-        registry_item_key = 'NEW_REGISTRY_ITEM_KEY'
+        registry_item_key = "NEW_REGISTRY_ITEM_KEY"
         registry_item = RegistryItem(registry_item_key)
         registry = Registry([registry_item])
 
@@ -59,7 +61,7 @@ class RegistryTest(TestCase):
 
     def test_registry_returns_correct_number_of_items(self):
         # Arrange
-        registry_item_key = 'NEW_REGISTRY_ITEM_KEY'
+        registry_item_key = "NEW_REGISTRY_ITEM_KEY"
         registry_item = RegistryItem(registry_item_key)
         registry = Registry([registry_item])
 
