@@ -10,7 +10,7 @@ matrix:
   include:
     - stage: Lint (Python 3.6)
       python: 3.6
-      env: TOXENV=isort, black, flake8, pylint
+      env: TOXENV=isort,black,flake8,pylint
 
     - stage: Tests (Python 2.7)
       python: 2.7

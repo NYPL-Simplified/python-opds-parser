@@ -1,5 +1,7 @@
 # python-webpub-manifest-parser
 
+[![Build Status](https://travis-ci.com/vbessonov/python-webpub-manifest-parser.svg?branch=master)](https://travis-ci.com/vbessonov/python-webpub-manifest-parser)
+
 Library containing a parser (webpub-manifest-parser) designed to parse [Readium Web Publication Manifest (RWPM)](https://github.com/readium/webpub-manifest) compatible documents such as [Open Publication Distribution System 2.0 (OPDS 2.0)](https://drafts.opds.io/opds-2.0) documents describing electronic publications.
 
 ## Usage
