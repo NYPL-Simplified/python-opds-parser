@@ -1,6 +1,7 @@
 import datetime
 from unittest import TestCase
 
+import six
 from parameterized import parameterized
 from pyfakefs.fake_filesystem_unittest import Patcher
 
@@ -394,7 +395,7 @@ class RWPMSyntaxAnalyzerTest(TestCase):
             (
                 "when_metadata_modified_property_has_incorrect_format",
                 RWPM_MANIFEST_WITH_INCORRECT_METADATA_MODIFIED_PROPERTY,
-                "u'2015-09-29T17:00:00Z---' is not a 'date-time'",
+                "'2015-09-29T17:00:00Z---' is not a 'date-time'",
             ),
             (
                 "when_metadata_modified_language_has_incorrect_format",
@@ -404,7 +405,7 @@ class RWPMSyntaxAnalyzerTest(TestCase):
             (
                 "when_contributor_identifier_has_incorrect_format",
                 RWPM_MANIFEST_WITH_INCORRECT_CONTRIBUTOR_IDENTIFIER_PROPERTY,
-                "u'x' is not a 'uri'",
+                "'x' is not a 'uri'",
             ),
             (
                 "when_link_height_less_or_equal_than_the_exclusive_minimum",
@@ -431,7 +432,8 @@ class RWPMSyntaxAnalyzerTest(TestCase):
                     syntax_analyzer.analyze(input_file)
 
                 self.assertEqual(
-                    expected_error_message, str(assert_raises_context.exception)
+                    expected_error_message,
+                    six.text_type(assert_raises_context.exception).strip("u"),
                 )
 
     def test_syntax_analyzer_returns_ast(self):

@@ -50,4 +50,7 @@ def encode(value):
     :return: Encoded string value or the initial value if it has a non-string type
     :rtype: Any
     """
-    return value.encode("utf-8") if is_string(value) else value
+    if isinstance(value, list):
+        return u"list({0}, ...)".format(first_or_default(value))
+
+    return value if is_string(value) else value

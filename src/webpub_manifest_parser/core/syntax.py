@@ -95,7 +95,7 @@ class SyntaxAnalyzer(object):
         :return: Property's value
         :rtype: Any
         """
-        self._logger.debug("Started extracting {0} property".format(object_property))
+        self._logger.debug(u"Started extracting {0} property".format(object_property))
 
         if isinstance(json_content, dict):
             property_value = json_content.get(object_property.key, None)
@@ -103,7 +103,7 @@ class SyntaxAnalyzer(object):
             property_value = json_content
 
         self._logger.debug(
-            "Finished extracting {0} property: {1}".format(
+            u"Finished extracting {0} property: {1}".format(
                 object_property, encode(property_value)
             )
         )
@@ -126,13 +126,13 @@ class SyntaxAnalyzer(object):
             return property_value
 
         self._logger.debug(
-            "Started looking for nested property {0}".format(object_property)
+            u"Started looking for nested property {0}".format(object_property)
         )
 
         type_parsers_result = find_parser(object_property.parser, TypeParser)
 
         self._logger.debug(
-            "Found the following type parsers: {0}".format(type_parsers_result)
+            u"Found the following type parsers: {0}".format(type_parsers_result)
         )
 
         found = False
@@ -167,12 +167,12 @@ class SyntaxAnalyzer(object):
 
         if found:
             self._logger.debug(
-                "Finished parsing nested property {0}: {1}".format(
+                u"Finished parsing nested property {0}: {1}".format(
                     object_property, encode(property_value)
                 )
             )
         else:
-            self._logger.debug("Property {0} is not nested".format(object_property))
+            self._logger.debug(u"Property {0} is not nested".format(object_property))
 
         return property_value
 
@@ -208,7 +208,7 @@ class SyntaxAnalyzer(object):
         :return: Node object
         :rtype: Node
         """
-        self._logger.debug("Started parsing {0} object".format(cls))
+        self._logger.debug(u"Started parsing {0} object".format(cls))
 
         ast_object = cls()
         ast_object_properties = PropertiesGrouping.get_class_properties(cls)
@@ -218,7 +218,7 @@ class SyntaxAnalyzer(object):
             property_value = self._parse_nested_object(property_value, object_property)
 
             self._logger.debug(
-                "Property '{0}' has the following value: {1}".format(
+                u"Property '{0}' has the following value: {1}".format(
                     object_property.key, encode(property_value)
                 )
             )
@@ -238,7 +238,7 @@ class SyntaxAnalyzer(object):
 
             setattr(ast_object, object_property_name, property_value)
 
-        self._logger.debug("Finished parsing {0} object: {1}".format(cls, ast_object))
+        self._logger.debug(u"Finished parsing {0} object: {1}".format(cls, ast_object))
 
         return ast_object
 
@@ -251,7 +251,7 @@ class SyntaxAnalyzer(object):
         :return: RWPM AST
         :rtype: ManifestLike
         """
-        self._logger.debug("Started analyzing input file {0}".format(input_file))
+        self._logger.debug(u"Started analyzing input file {0}".format(input_file))
 
         input_file_content = input_file.read()
         input_file_content = input_file_content.strip()
@@ -261,7 +261,7 @@ class SyntaxAnalyzer(object):
         manifest = self._parse_object(manifest_json, manifest.__class__)
 
         self._logger.debug(
-            "Finished analyzing input file {0}: {1}".format(input_file, manifest)
+            u"Finished analyzing input file {0}: {1}".format(input_file, manifest)
         )
 
         return manifest

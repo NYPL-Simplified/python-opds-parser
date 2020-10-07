@@ -101,7 +101,7 @@ class LinkProperties(Node):
         :return: String representation
         :rtype: str
         """
-        return "<LinkProperties(clipped={0}, fit={1}, orientation={2}, page={3}, spread={4})>".format(
+        return u"<LinkProperties(clipped={0}, fit={1}, orientation={2}, page={3}, spread={4})>".format(
             self.clipped, self.fit, self.orientation, self.page, self.spread
         )
 
@@ -231,20 +231,20 @@ class Link(Node):
         :rtype: str
         """
         return (
-            "<Link("
-            "href={0}, "
-            "templated={1}, "
-            "type={2}, "
-            "title={3}, "
-            "rel={4}, "
-            "properties={5}, "
-            "height={6}, "
-            "width={7}, "
-            "duration={8}, "
-            "bitrate={9}, "
-            "language={10}, "
-            "alternate={11}, "
-            "children={12}".format(
+            u"<Link("
+            u"href={0}, "
+            u"templated={1}, "
+            u"type={2}, "
+            u"title={3}, "
+            u"rel={4}, "
+            u"properties={5}, "
+            u"height={6}, "
+            u"width={7}, "
+            u"duration={8}, "
+            u"bitrate={9}, "
+            u"language={10}, "
+            u"alternate={11}, "
+            u"children={12}".format(
                 self.href,
                 self.templated,
                 self.type,
@@ -352,7 +352,7 @@ class Contributor(Node):
         :return: String representation
         :rtype: str
         """
-        return "<Contributor(name={0}, identifier={1}, sort_as={2}, role={3}, position={4}, links={5})>".format(
+        return u"<Contributor(name={0}, identifier={1}, sort_as={2}, role={3}, position={4}, links={5})>".format(
             encode(self.name),
             self.identifier,
             self.sort_as,
@@ -400,7 +400,7 @@ class Subject(Node, PropertiesGrouping):
         :rtype: str
         """
         return (
-            "<Subject(name={0}, sort_as={1}, code={2}, scheme={3}, links={4})>".format(
+            u"<Subject(name={0}, sort_as={1}, code={2}, scheme={3}, links={4})>".format(
                 self.name, self.sort_as, self.code, self.scheme, self.links
             )
         )
@@ -438,7 +438,7 @@ class Owner(Node, PropertiesGrouping):
         :return: String representation
         :rtype: str
         """
-        return "<Owner(collection={0}, series={1})>".format(
+        return u"<Owner(collection={0}, series={1})>".format(
             self.collection, self.series
         )
 

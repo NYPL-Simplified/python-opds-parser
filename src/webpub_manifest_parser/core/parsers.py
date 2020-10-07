@@ -74,13 +74,13 @@ class AnyOfParser(ValueParser):
         first_validation_error = None
 
         for parser in self._inner_parsers:
-            self._logger.debug("Running {0} parser".format(parser))
+            self._logger.debug(u"Running {0} parser".format(parser))
 
             try:
                 result = parser.parse(value)
 
                 self._logger.debug(
-                    "Parser {0} succeeded: {1}".format(parser, encode(result))
+                    u"Parser {0} succeeded: {1}".format(parser, encode(result))
                 )
 
                 return result
@@ -90,7 +90,7 @@ class AnyOfParser(ValueParser):
                 if first_validation_error is None:
                     first_validation_error = error
 
-        self._logger.debug("All parsers failed")
+        self._logger.debug(u"All parsers failed")
 
         raise first_validation_error
 
@@ -150,23 +150,23 @@ class NumericParser(ValueParser):
 
         if self._minimum is not None and value < self._minimum:
             raise ValueParsingError(
-                "Value {0} is less than the minimum ({1})".format(value, self._minimum)
+                u"Value {0} is less than the minimum ({1})".format(value, self._minimum)
             )
         if self._exclusive_minimum is not None and value <= self._exclusive_minimum:
             raise ValueParsingError(
-                "Value {0} is less or equal than the exclusive minimum ({1})".format(
+                u"Value {0} is less or equal than the exclusive minimum ({1})".format(
                     value, self._exclusive_minimum
                 )
             )
         if self._maximum is not None and value > self._maximum:
             raise ValueParsingError(
-                "Value {0} is greater than the maximum ({1})".format(
+                u"Value {0} is greater than the maximum ({1})".format(
                     value, self._maximum
                 )
             )
         if self._exclusive_maximum is not None and value >= self._exclusive_maximum:
             raise ValueParsingError(
-                "Value {0} is greater or equal than the exclusive maximum ({1})".format(
+                u"Value {0} is greater or equal than the exclusive maximum ({1})".format(
                     value, self._exclusive_maximum
                 )
             )
@@ -238,7 +238,7 @@ class BooleanParser(ValueParser):
             if value == "true":
                 return True
 
-        raise ValueParsingError("Value '{0}' must be boolean".format(encode(value)))
+        raise ValueParsingError(u"Value '{0}' must be boolean".format(encode(value)))
 
 
 class StringParser(ValueParser):
@@ -257,7 +257,7 @@ class StringParser(ValueParser):
         """
         if not is_string(value):
             raise ValueParsingError(
-                "Value '{0}' must be a string".format(encode(value))
+                u"Value '{0}' must be a string".format(encode(value))
             )
 
         return value
@@ -293,7 +293,7 @@ class StringPatternParser(StringParser):
 
         if not self._regex.match(value):
             raise ValueParsingError(
-                "String value '{0}' does not match regular expression {1}".format(
+                u"String value '{0}' does not match regular expression {1}".format(
                     encode(value), self._pattern
                 )
             )
@@ -327,7 +327,7 @@ class EnumParser(StringParser):
 
         if value not in self._items:
             raise ValueParsingError(
-                "Value '{0}' is not among {1}".format(encode(value), self._items)
+                u"Value '{0}' is not among {1}".format(encode(value), self._items)
             )
 
         return value
@@ -521,7 +521,7 @@ class ArrayParser(ValueParser):
         :raise: ValidationError
         """
         if not isinstance(value, list):
-            raise ValueParsingError("Value '{0}' must be a list".format(encode(value)))
+            raise ValueParsingError(u"Value '{0}' must be a list".format(encode(value)))
 
         result = set()
 
@@ -529,7 +529,9 @@ class ArrayParser(ValueParser):
             item = self._item_parser.parse(item)
 
             if self._unique_items and item in result:
-                raise ValueParsingError("Item '{0}' is not unique".format(encode(item)))
+                raise ValueParsingError(
+                    u"Item '{0}' is not unique".format(encode(item))
+                )
 
             result.add(item)
 
@@ -572,12 +574,12 @@ class ObjectParser(ValueParser):
         for key, item in value.items():
             if not isinstance(key, str):
                 raise ValueParsingError(
-                    "Key '{0}' must be a string".format(encode(key))
+                    u"Key '{0}' must be a string".format(encode(key))
                 )
 
             if self._properties_regex and not self._properties_regex.match(key):
                 raise ValueParsingError(
-                    "Key '{0}' does not match the pattern '{1}'".format(
+                    u"Key '{0}' does not match the pattern '{1}'".format(
                         encode(key), self._properties_regex
                     )
                 )
@@ -634,7 +636,7 @@ class TypeParser(ValueParser):
         """
         if not isinstance(value, self._type):
             raise ValueParsingError(
-                "Value '{0}' must be an instance of '{1}'".format(
+                u"Value '{0}' must be an instance of '{1}'".format(
                     encode(value), self._type
                 )
             )

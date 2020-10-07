@@ -1,4 +1,4 @@
-.PHONY: config install lint full-lint test build publish clean all ci
+.PHONY: init install build publish clean reformat lint test-py27 test-py36 test-py37 test-py38 test
 .DEFAULT_GOAL := all
 
 all: install lint build
@@ -45,3 +45,6 @@ test-py37:
 
 test-py38:
 	tox -e py38
+
+test:
+	tox -e py27,py36,py37,py38
