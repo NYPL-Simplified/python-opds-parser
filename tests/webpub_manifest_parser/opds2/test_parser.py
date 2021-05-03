@@ -22,7 +22,7 @@ from webpub_manifest_parser.opds2.registry import (
 from webpub_manifest_parser.utils import first_or_default
 
 
-class OPDS2Parser(TestCase):
+class OPDS2ParserTest(TestCase):
     def test(self):
         # Arrange
         parser_factory = OPDS2DocumentParserFactory()
@@ -54,7 +54,7 @@ class OPDS2Parser(TestCase):
         self.assertEqual("Moby-Dick", publication.metadata.title)
         self.assertEqual(
             [Contributor(name="Herman Melville", roles=[], links=LinkList())],
-            publication.metadata.authors
+            publication.metadata.authors,
         )
         self.assertEqual("urn:isbn:978-3-16-148410-0", publication.metadata.identifier)
         self.assertEqual(["en"], publication.metadata.languages)

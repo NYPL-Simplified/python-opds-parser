@@ -735,7 +735,7 @@ class DocumentParser(object):
 
         return manifest
 
-    def parse_url(self, url, encoding="utf-8"):
+    def parse_url(self, url, encoding="utf-8", auth=None):
         """Fetch the content pointed by the URL, parse it and return a validated AST object.
 
         :param url: URL pointing to the RWPM-compatible document
@@ -744,10 +744,13 @@ class DocumentParser(object):
         :param encoding: Input file's encoding
         :type encoding: str
 
+        :param auth: Authentication information
+        :type auth: requests.auth.AuthBase
+
         :return: Validated manifest-like object
         :rtype: python_rwpm_parser.ast.Manifestlike
         """
-        response = requests.get(url)
+        response = requests.get(url, auth=auth)
         input_stream = StringIO(six.text_type(response.content, encoding))
         manifest_json = self.get_manifest_json(input_stream)
         manifest = self._syntax_analyzer.analyze(manifest_json)

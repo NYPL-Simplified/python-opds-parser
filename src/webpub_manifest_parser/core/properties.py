@@ -12,6 +12,7 @@ from webpub_manifest_parser.core.parsers import (
     EnumParser,
     IntegerParser,
     LocalizableStringParser,
+    NumberParser,
     StringParser,
     StringPatternParser,
     TypeParser,
@@ -342,7 +343,7 @@ class NumberProperty(Property):
         super(NumberProperty, self).__init__(
             key,
             required,
-            IntegerParser(minimum, exclusive_minimum, maximum, exclusive_maximum),
+            NumberParser(minimum, exclusive_minimum, maximum, exclusive_maximum),
             default_value,
         )
 
